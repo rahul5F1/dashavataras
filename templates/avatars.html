@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lord Vishnu Avatars</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/avatar-style.css') }}">
+</head>
+<body class="avatars-bg">
+
+    <!-- Header Section -->
+    <header class="header">
+        <div class="logo">
+            <h1>Lord Vishnu Avatars</h1>
+        </div>
+        <nav class="nav">
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('avatars_page') }}">Avatars</a></li>
+                <li><a href="https://www.linkedin.com/in/ramavath-rahul-12542926a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">Contact Developer</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Avatar Cards -->
+    <div class="avatars-container">
+        {% for avatar in avatars %}
+        <div class="avatar-card" onclick="openModal('{{ avatar.name }}', '{{ avatar.brief }}', '{{ avatar.bg_image }}')">
+            <div class="avatar-img-container">
+                <img src="{{ url_for('static', filename='images/' + avatar.image) }}" alt="{{ avatar.name }}" data-tilt>
+            </div>
+            <h2>{{ avatar.name }}</h2> <!-- Make avatar name clickable -->
+            <p>{{ avatar.desc }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Modal -->
+    <div id="avatarModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div id="modal-avatar-name" class="modal-header">
+                <h2>
+                    <span id="avatarNameText"></span>
+                    <span class="modal-speaker-icon" onclick="toggleModalSpeech()" title="Listen">🔊</span>
+                </h2>
+            </div>
+            <div id="modal-avatar-description" class="modal-body">
+                <p></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <p>&copy; 2025 Lord Vishnu Avatars. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.3/dist/vanilla-tilt.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/audio-controls.js') }}"></script>
+</body>
+</html>

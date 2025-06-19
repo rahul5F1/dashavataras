@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lord Vishnu and His Avatars</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="landing">
+    <div class="overlay">
+        <div class="content">
+            <div class="speaker-icon" onclick="toggleSpeech()" title="Listen">
+                🔊
+            </div>
+            <h1>Lord Vishnu</h1>
+            <p>
+                Lord Vishnu, one of the principal deities of Hinduism, is known as the preserver and protector of the universe. He has incarnated in many forms (Dashavatara) to restore cosmic order. Explore his avatars and discover their unique stories and significance.
+            </p>
+            <button onclick="window.location.href='{{ url_for('avatars_page') }}'">Go</button>
+        </div>
+    </div>
+
+    <script>
+        const paragraphEl = document.querySelector('.content p');
+        let isSpeaking = false;
+        let currentIndex = 0;
+        let speechChunks = [];
+        let originalText = paragraphEl.innerText;
+        let previousVolume = null;
+        let pollingInterval = null;
+
+        function toggleSpeech() {
+            if (isSpeaking) {
+                speechSynthesis.cancel();
+                stopSpeech();
+                return;
+            }
+
+            isSpeaking = true;
+            currentIndex = 0;
+            speechChunks = splitIntoChunks(originalText);
+
+            // Lower volume if needed
+            if (window.bgAudio && !bgAudio.muted && bgAudio.volume > 0.15) {
+                previousVolume = bgAudio.volume;
+                bgAudio.volume = 0.15;
+                const volBar = document.getElementById("volume-bar");
+                if (volBar) {
+                    volBar.value = 15;
+                    volBar.title = "Volume: 15%";
+                }
+            }
+
+            speakChunk();
+            startPolling();
+        }
+
+        function speakChunk() {
+            if (!isSpeaking || currentIndex >= speechChunks.length) {
+                stopSpeech();
+                return;
+            }
+
+            const chunk = speechChunks[currentIndex];
+            highlightText(chunk.start, chunk.end);
+
+            const utterance = new SpeechSynthesisUtterance(chunk.text);
+            utterance.rate = 0.95;
+
+            speechSynthesis.cancel(); // Clean start
+            speechSynthesis.speak(utterance);
+        }
+
+        function startPolling() {
+            clearInterval(pollingInterval);
+            pollingInterval = setInterval(() => {
+                if (!speechSynthesis.speaking && !speechSynthesis.pending && isSpeaking) {
+                    currentIndex++;
+                    if (currentIndex < speechChunks.length) {
+                        speakChunk();
+                    } else {
+                        stopSpeech();
+                    }
+                }
+            }, 500);
+        }
+
+        function stopSpeech() {
+            isSpeaking = false;
+            currentIndex = 0;
+            clearInterval(pollingInterval);
+            paragraphEl.innerHTML = originalText;
+
+            // Restore volume
+            if (previousVolume !== null && window.bgAudio && !bgAudio.muted) {
+                bgAudio.volume = previousVolume;
+                const volBar = document.getElementById("volume-bar");
+                if (volBar) {
+                    volBar.value = previousVolume * 100;
+                    volBar.title = `Volume: ${Math.round(previousVolume * 100)}%`;
+                }
+                previousVolume = null;
+            }
+        }
+
+        function highlightText(start, end) {
+            const full = originalText;
+            const before = full.slice(0, start);
+            const highlight = full.slice(start, end);
+            const after = full.slice(end);
+            paragraphEl.innerHTML = `${before}<span class="highlighted">${highlight}</span>${after}`;
+        }
+
+        function splitIntoChunks(text) {
+            const regex = /[^.?!]+[.?!]+[\])'"`’”]*\s*/g;
+            let match;
+            const chunks = [];
+
+            while ((match = regex.exec(text)) !== null) {
+                chunks.push({
+                    start: match.index,
+                    end: match.index + match[0].length,
+                    text: match[0].trim()
+                });
+            }
+
+            // Add last leftover
+            if (chunks.length === 0 || chunks[chunks.length - 1].end < text.length) {
+                const lastStart = chunks.length ? chunks[chunks.length - 1].end : 0;
+                chunks.push({
+                    start: lastStart,
+                    end: text.length,
+                    text: text.slice(lastStart).trim()
+                });
+            }
+
+            return chunks;
+        }
+    </script>
+
+    <script src="{{ url_for('static', filename='js/audio-controls.js') }}"></script>
+</body>
+</html>
