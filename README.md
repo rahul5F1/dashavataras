@@ -40,7 +40,7 @@ This is a beautifully designed interactive web project that showcases **Lord Vis
 
 1. **Clone the repository**  
    ```bash
-   git clone https://github.com/your-username/lord-vishnu-avatars.git
+   git clone https://github.com/rahul5F1/lord-vishnu-avatars.git
    cd lord-vishnu-avatars
 2. **Create a virtual environment (optional but recommended)**
   ```bash
