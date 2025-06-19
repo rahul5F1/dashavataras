@@ -22,9 +22,7 @@ This is a beautifully designed interactive web project that showcases **Lord Vis
 
 | Landing Page | Avatar Modal |
 |--------------|--------------|
-| ![Landing](![Screenshot 2025-06-19 230252](https://github.com/user-attachments/assets/a2102528-154d-49c5-bba3-9d69a1c55ea6)
-) | ![Modal](![Screenshot 2025-06-19 230308](https://github.com/user-attachments/assets/8e393ee2-8c69-45e5-8d05-b65c14356f31)
-) |
+| ![Landing](![Screenshot 2025-06-19 230252](https://github.com/user-attachments/assets/a2102528-154d-49c5-bba3-9d69a1c55ea6)) | ![Modal](![Screenshot 2025-06-19 230308](https://github.com/user-attachments/assets/8e393ee2-8c69-45e5-8d05-b65c14356f31)) |
 
 ---
 
