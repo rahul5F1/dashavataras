@@ -43,19 +43,19 @@ This is a beautifully designed interactive web project that showcases **Lord Vis
    git clone https://github.com/rahul5F1/lord-vishnu-avatars.git
    cd lord-vishnu-avatars
 2. **Create a virtual environment (optional but recommended)**
-  ```bash
-  python -m venv venv
-source venv/bin/activate    # On Windows: venv\Scripts\activate
-```
+   ```bash
+   python -m venv venv
+   source venv/bin/activate    # On Windows: venv\Scripts\activate
+   ```
 3. **Install Flask**
-  ```bash
-  pip install flask
-  ```
+   ```bash
+   pip install flask
+   ```
 
 4. **Run the application**
-  ```bash
-  python app.py
-  ```
+   ```bash
+   python app.py
+   ```
 5. **Open your browser and go to**
    ```bash
     http://127.0.0.1:5000
@@ -72,5 +72,5 @@ Made with 💙 by Ramavath Rahul
 
 If you like this project, feel free to ⭐ star it or fork it!
 Questions or feedback? Reach out via 
-. `LinkedIn`: https://www.linkedin.com/in/ramavath-rahul-12542926a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app 
-. `email`: rahulramavath113@gmail.com
+- `LinkedIn`: https://www.linkedin.com/in/ramavath-rahul-12542926a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app 
+- `email`: rahulramavath113@gmail.com
