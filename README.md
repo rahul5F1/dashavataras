@@ -14,6 +14,9 @@ This is a beautifully designed interactive web project that showcases **Lord Vis
 - 📜 **Avatar Descriptions** with modal popup
 - 🧘‍♂️ Fully responsive and spiritual design
 - 🎵 Optional background music support
+  (Song name: The Great War
+   Movie: Kalki 2898 AD - (2024)
+   Artist: Santhosh Narayanan)
 - ⚙️ Speech auto-polling to support all browsers
 
 ---
